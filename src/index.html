@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+    <aside class="side-bar">
+        <div class="menu-header">
+            <i class="fa-solid fa-bars"></i>
+            <h2 id="menu-title">Menu</h2>
+        </div>
+        <div class="tasks-boxs">
+            <div class="box inbox" data-page="Inbox">
+                <i class="fa-solid fa-box-archive"></i>
+                <h3>Inbox</h3>
+            </div>
+            <div class="box today" data-page="Today">
+                <i class="fa-solid fa-calendar-days"></i>
+                <h3>Today</h3>
+            </div>
+            <div class="box upcoming" data-page="Upcoming">
+                <i class="fa-regular fa-calendar"></i>
+                <h3>Upcoming</h3>
+            </div>
+        </div>
+        <div class="projects-menu">
+            <div class="projects-header">
+                <h3>My projects</h3>
+                <i class="fa-solid fa-circle-plus add-new-project"></i>
+            </div>
+            <div class="my-projects">
+                
+            </div>
+            <div class="new-project">
+                <h3>New project</h3>
+                <form >
+                    <input type="text" id="project-name" placeholder="Name..." required>
+                    <div class="btns-new-task">
+                        <button class="add-project" type="submit">Add</button>
+                        <button class="cancel-project">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </aside>
+    <main class="container">
+        <div class="home"></div>
+        <div class="tasks-container"></div>
+    </main>
+
+    <div class="new-task">
+        <p>New Task</p>
+        <form id="task-form">
+            <input type="text" placeholder="Title" required>
+            <textarea id="description" placeholder="Description..."></textarea>
+            <section class="set-project">
+                <input type="date" id="date-task" required>
+                <fieldset class="set1">
+                    <span>Where?</span>
+                    <select id="choose-project">
+                        <option value="inbox">Inbox</option>
+                    </select>
+                </fieldset>
+                <fieldset class="set2">
+                    <span>Priority</span>
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="hight">Hight</option>
+                    </select>
+                </fieldset>
+            </section>
+            <button type="submit" class="add-task-btn">Add task</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<!-- tasks.length === 0 ? 1 : tasks[tasks.length - 1].id + 1 -->
