@@ -392,6 +392,8 @@ select:focus {
 }
 
 @media (max-width:780px) {
+ 
+
     .side-bar {
         width: 55px;
     }
@@ -415,11 +417,16 @@ select:focus {
     .menu-header i {
         font-size: 25px;
     }
+
+    .task-title, .projects-header {
+        font-size: 20px;
+    }
 }
 
-@media (max-width:495px) {
-    .projects-header {
-        font-size: 20px;
+@media (max-width:500px) {
+    .projects-header, 
+    .task-title{
+        font-size: 18px;
     }
 
     .new-project {
@@ -433,10 +440,6 @@ select:focus {
     .set-project {
         flex-direction: column;
         
-    }
-
-    .task-title {
-        font-size: 20px;
     }
 
     .date {
