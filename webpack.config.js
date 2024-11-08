@@ -25,7 +25,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename:"style.css"
         })
-    ],
+        ,
+        new MiniCssExtractPlugin({
+            filename:"responsivo.css"
+        })    ],
     module: {
         rules: [
             {

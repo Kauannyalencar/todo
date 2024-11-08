@@ -6,6 +6,7 @@ import Upcoming from './upcoming'
 import Projects, { Project, projectsList, ManageProject } from './projects'
 import { Task, TaskRenderer, tasks } from './tasks';
 
+
 const newProjectForm = document.querySelector(".new-project")
 const form = document.getElementById("task-form")
 const [title, description, date] = form.elements;
@@ -13,37 +14,13 @@ const projetSet = form.querySelector("select#choose-project")
 const projectPriority = form.querySelector("select#priority")
 const btnAddProject = document.querySelector(".add-project")
 const cancelProject = document.querySelector(".cancel-project")
-// const editProject = document.querySelector(".") 
+const closeForm = document.querySelector(".close")
+const toggleMenu = document.querySelector(".menu")
 
 // Toggle modal visibility
 function toggleElements(el) {
-    el == form.parentElement || newProjectForm;
-    el.style.display = el.style.display == "block" ? "none" : "block"
-    // el.classList.toggle("hidden")
+    el.classList.toggle("hidden")
 }
-
-
-
-// Abre o modal task
-document.addEventListener("click", (event) => {
-    const target = event.target;
- 
-    if (target.textContent === "New Task") {
-        toggleElements(form.parentElement)
-    } else if (target.classList.contains("add-new-project")) {
-        toggleElements(newProjectForm)
-    }
-
-    const pages = document.querySelectorAll(".box");
-
-    pages.forEach((page) => {
-        page.addEventListener("click", () => {
-            togglePage(page.dataset.page)
-            console.log(page);
-            
-        })
-    })
-})
 
 
 class handleTasksPage {
@@ -82,10 +59,10 @@ class handleTasksPage {
     projectsPage() {
         //todos os projetos
         this.filter = this.taskRender.projectTasks(this.taskProject);
-        const project = new ManageProject()
-        project.updateTitleHome(project.showProjectTasks(this.taskProject))
+        console.log(this.filter = this.taskRender.projectTasks(this.taskProject));
+
         this.taskRender.createUI(this.filter)
-        
+
     }
 
     // taskToProject() {
@@ -96,7 +73,6 @@ class handleTasksPage {
 }
 
 function togglePage(page) {
-    console.log(page);
 
     const changePage = new handleTasksPage(page)
     switch (page) {
@@ -116,6 +92,44 @@ function togglePage(page) {
 
 }
 
+document.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (target.textContent === "New Task") {
+        toggleElements(form.parentElement)
+    } else if (target.classList.contains("add-new-project")) {
+        toggleElements(newProjectForm)
+    } else if (target.classList.contains("complete-btn")) {
+        const task = document.querySelector(".task")
+        task.classList.add("completed")
+    }
+   
+    const pages = document.querySelectorAll(".box");
+
+    pages.forEach((page) => {
+        page.addEventListener("click", () => {
+            togglePage(page.dataset.page)
+            const dataTitle = page.getAttribute('data-title');
+            if (!dataTitle) return
+
+            const setTitle = new ManageProject()
+            setTitle.updateTitleHome(dataTitle)
+
+        })
+    })
+
+    const showDecrption = document.querySelectorAll(".show-more")
+    const header = document.querySelector(".task-header")
+    showDecrption.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const fullDescription = btn.previousElementSibling;
+            header.style.height = "auto"
+            toggleElements(btn.parentElement.firstElementChild)
+            toggleElements(fullDescription)
+        })
+    })
+})
+
 form.addEventListener("submit", (e) => {
     e.preventDefault()
     const taskObj = new Task(title.value, description.value, date.value, projectPriority.value, projetSet.value);
@@ -123,22 +137,31 @@ form.addEventListener("submit", (e) => {
     toggleElements(form.parentElement)
     tasks.push(taskObj);
     const projectTask = new handleTasksPage(taskObj.project)
-    
+
     projectTask.inboxPage()
 })
 
 btnAddProject.addEventListener("click", (e) => {
     e.preventDefault();
-    const projectName = document.querySelector("#project-name");
     toggleElements(newProjectForm)
+    const projectName = document.querySelector("#project-name");
     const project = new Project(projectName.value, projectsList.length === 0 ? 1 : projectsList[projectsList.length - 1].id + 1)
     projectsList.push(project);
     project.createUi()
     project.addProjectToOption();
-
     projectName.value = ''
-
 })
 
 cancelProject.addEventListener("click", () => toggleElements(newProjectForm));
 
+closeForm.addEventListener("click",() => toggleElements(form.parentElement))
+
+toggleMenu.addEventListener("click", () => {
+    const sideBar = toggleMenu.parentElement.parentElement
+    sideBar.classList.toggle("show")
+
+    const mainBar = toggleMenu.parentElement.nextElementSibling
+    mainBar.classList.toggle("showMenu")
+    console.log(mainBar);
+}
+)

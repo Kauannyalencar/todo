@@ -8,8 +8,8 @@
 
 body {
     background-color: #faf8f6;
-    display: grid;
-    grid-template-columns: 300px auto;
+    display: flex;
+    /* grid-template-columns: 300px auto; */
     font-family: "Poppins";
     color: hsl(240, 1%, 26%);
 }
@@ -18,6 +18,8 @@ body {
 .side-bar {
     background-color: #e1e0e0;
     padding: 10px;
+    max-width: 300px;
+    width: 100%;
     height: 100vh;
 }
 
@@ -74,9 +76,13 @@ body {
     width: 80%;
     font-size: 18px;
     padding: 10px 35px;
+    overflow: hidden;
 }
 
 .project>h3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-weight: 600;
 }
 
@@ -86,7 +92,7 @@ body {
     gap: 20px;
 }
 
-.project-icons i{
+.project-icons i {
     transition: ease-out .2s;
     font-size: 20px;
 }
@@ -95,8 +101,8 @@ body {
     transform: scale(1.1);
 }
 
-.new-project {   
-    display: none;
+.new-project {
+    display: block;
     background-color: #bec6bb;
     position: absolute;
     width: 250px;
@@ -121,9 +127,6 @@ body {
     margin: 10px 0px;
 }
 
-.hidden{
-    display: none;
-}
 
 .btns-new-task {
     display: flex;
@@ -157,6 +160,7 @@ body {
 
 .container {
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,7 +173,7 @@ body {
     font-size: 20px;
 }
 
-.current-page{
+.current-page {
     margin: 5px;
 }
 
@@ -189,7 +193,7 @@ body {
 }
 
 .new-task {
-    display: none;
+    display: block;
     position: absolute;
     left: 50%;
     top: 10%;
@@ -204,6 +208,18 @@ body {
     max-width: 700px;
     z-index: 999;
     background-color: #605d5d;
+}
+
+.fa-xmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    font-size: 25px;
+}
+
+.fa-xmark:hover {
+    background-color: #ce3838;
 }
 
 #task-form {
@@ -289,20 +305,28 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    /* gap: 15px; */
     padding: 15px;
 }
 
-.task-header>p {
+.task-header {
     max-width: 400px;
-    width: 500px;
+    font-size: 14px;
+    transition: height 0.3s ease-in-out;
+}
+
+.task-header .description {
+    max-width: 100px;
+    /* width: 500px; */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.date {
-    color: #a49e9e;
+.full-description {
+    margin-top: 5px;
+    display: block;
+
 }
 
 .date {
@@ -311,24 +335,27 @@ select:focus {
     font-weight: 600;
 }
 
+.due-date {
+    color: #747dca;
+    font-size: 20px;
+}
+
 .priority-task {
-    padding: 5px;
+    padding: 8px;
     border-radius: 18px;
-    width: 65px;
-    text-align: center;
     cursor: pointer;
 }
 
 .priority-task.low {
-    border: 2px solid green;
+    border: 3px solid green;
 }
 
 .priority-task.medium {
-    border: 2px solid rgb(170, 84, 19);
+    border: 3px solid rgb(170, 84, 19);
 }
 
 .priority-task.high {
-    border: 2px solid #9c0a0a;
+    border: 3px solid #9c0a0a;
 }
 
 .btns-task button {
@@ -348,4 +375,85 @@ select:focus {
     gap: 30px;
     padding: 10px;
     font-size: 24px;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.show-more {
+    color: #363638;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width:780px) {
+    .side-bar {
+        width: 55px;
+    }
+
+    .main-bar {
+        display: none;
+    }
+
+    .menu-header h2 {
+        display: none;
+    }
+
+    .side-bar.show {
+        width: 380px;
+    }
+
+    .showMenu {
+        display: block;
+    }
+
+    .menu-header i {
+        font-size: 25px;
+    }
+}
+
+@media (max-width:495px) {
+    .projects-header {
+        font-size: 20px;
+    }
+
+    .new-project {
+        left: 45px;
+        width: 80%;
+    }
+
+    .new-task{
+        width: 90%;
+    }
+    .set-project {
+        flex-direction: column;
+        
+    }
+
+    .task-title {
+        font-size: 20px;
+    }
+
+    .date {
+        font-size: 15px;
+    }
+
+    .due-date {
+        font-size: 15px;
+    }
+
+    .btns-task ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .priority-task {
+        display: none;
+    }
 }

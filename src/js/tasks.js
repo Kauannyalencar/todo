@@ -3,10 +3,10 @@ import { differenceInDays, isToday, format, parseISO, isAfter } from "date-fns";
 export const tasks = [
     {
         title: "Estudar",
-        description: "REACT",
+        description: "REACT klje csjb oncqspb jbdsjob obsadih  docnbsjbSOABBCSU ewfbjdbads jasdbkkabd",
         date: new Date(2024, 9, 30).toLocaleDateString(),
         id: 1,
-        projectPriority: "Medium",
+        projectPriority: "medium",
         project: "gym"
     },
 ];
@@ -34,58 +34,69 @@ export class TaskRenderer {
 
     createUI(filteredTasks) {
         this.handleDate()
+        console.log("AQUI");
 
         const taskContainer = document.querySelector(".tasks-container")
         taskContainer.innerHTML = '';
         taskContainer.innerHTML += filteredTasks.map(task =>
             `<div class="task">
     <header class="task-header">
-        <h1>${task.title}</h1>
-        <span class="date">${this.actualData}</p>
+        <h1 class="task-title">${task.title}</h1>
+        <span class="date">${this.actualData}</span>
+        <div class="description-container">
+            <p class="description">${task.description}</p>
+            <p class="full-description hidden">${task.description}</p>
+            <p class="show-more">Show more</p>
+        </div>
     </header>
     <div class="due-date">
         <span>${task.date}</span>
     </div>
     <div class="btns-task">
         <ul>
-            <li><i class="fa-solid fa-check"></i></li>
-            <li><i class="fa-solid fa-trash-can"></i></li>
+            <li ><i class="fa-solid fa-check complete-btn" id=${task.id}></i></li>
+            <li><i class="fa-solid fa-trash-can delete-task"></i></li>
         </ul>
     </div>
-    <span class="priority-task">${task.projectPriority}</span>
+    <span class="priority-task ${task.projectPriority}" data-project="${task.project}">${task.projectPriority}</span>
     </div> 
         `
         ).join("")
+
+        const deleteBtns = document.querySelectorAll(".delete-task")
+        deleteBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                todo.delete(Number(btn.id))
+            })
+        })
     }
 
-    todayFilter(){
-        const filteredTasks = tasks.filter((task)=>{
-         const taskDate = parseISO(task.date)
-         return isToday(taskDate)   
+    todayFilter() {
+        const filteredTasks = tasks.filter((task) => {
+            const taskDate = parseISO(task.date)
+            return isToday(taskDate)
         })
         return filteredTasks;
     }
 
-    upComingFilter(filter){
-        const filteredTasks = tasks.filter((task)=>{
+    upComingFilter(filter) {
+        const filteredTasks = tasks.filter((task) => {
             const taskDate = parseISO(task.date)
-            return isAfter(taskDate, filter)   
-           })
-           return filteredTasks;
+            return isAfter(taskDate, filter)
+        })
+        return filteredTasks;
     }
-    
-    projectTasks(filter){
-        const filteredTasks = tasks.filter((task)=>{
-            
+
+    projectTasks(filter) {
+        const filteredTasks = tasks.filter((task) => {
             const projectTask = task.project === filter
             return projectTask;
-           })
-           
-           return filteredTasks;
-    }
-      
-}
+        })
 
+        return filteredTasks;
+    }
+
+}
 
 export class Task extends TaskRenderer {
     constructor(title, description, date, priority, project) {
@@ -101,19 +112,21 @@ export class Task extends TaskRenderer {
 }
 
 export class Todo {
-    constructor() {
+    constructor(task) {
+        this.taskObj = new TaskRenderer()
 
     }
 
+    delete(task) {
+        const taskId = tasks.findIndex(item => item.id == task)
 
-    delete() {
-
+        tasks.splice(taskId, 1)
+        this.taskObj.createUI(tasks);
     }
 
-    edit() {
-
-    }
 }
 
+const initDOM = new TaskRenderer()
+initDOM.createUI(tasks)
 
-
+const todo = new Todo()
