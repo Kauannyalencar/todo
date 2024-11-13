@@ -22,7 +22,6 @@ function toggleElements(el) {
     el.classList.toggle("hidden")
 }
 
-
 class handleTasksPage {
     constructor(project) {
         this.taskRender = new TaskRenderer();
@@ -103,7 +102,7 @@ document.addEventListener("click", (event) => {
         const task = document.querySelector(".task")
         task.classList.add("completed")
     }
-   
+
     const pages = document.querySelectorAll(".box");
 
     pages.forEach((page) => {
@@ -133,7 +132,7 @@ document.addEventListener("click", (event) => {
 form.addEventListener("submit", (e) => {
     e.preventDefault()
     const taskObj = new Task(title.value, description.value, date.value, projectPriority.value, projetSet.value);
-
+    form.reset()
     toggleElements(form.parentElement)
     tasks.push(taskObj);
     const projectTask = new handleTasksPage(taskObj.project)
@@ -154,7 +153,7 @@ btnAddProject.addEventListener("click", (e) => {
 
 cancelProject.addEventListener("click", () => toggleElements(newProjectForm));
 
-closeForm.addEventListener("click",() => toggleElements(form.parentElement))
+closeForm.addEventListener("click", () => toggleElements(form.parentElement))
 
 toggleMenu.addEventListener("click", () => {
     const sideBar = toggleMenu.parentElement.parentElement

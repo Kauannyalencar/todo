@@ -34,7 +34,6 @@ export class TaskRenderer {
 
     createUI(filteredTasks) {
         this.handleDate()
-        console.log("AQUI");
 
         const taskContainer = document.querySelector(".tasks-container")
         taskContainer.innerHTML = '';
