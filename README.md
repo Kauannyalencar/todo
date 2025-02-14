@@ -1,7 +1,7 @@
 
 <h1 align="center"> Todo list</h1>
 
-![Preview](./src/assets/img/Captura%20de%20tela%202025-02-13%20155327.png)
+![Preview](./src/Captura%20de%20tela%202025-02-13%20211752.png)
 
 ![Badge](https://img.shields.io/badge/license-MIT-blue) 
 
