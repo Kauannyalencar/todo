@@ -9,7 +9,6 @@ const  Inbox = function() {
         </div> 
     `;
     
-  
 }
 
 Inbox();

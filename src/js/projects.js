@@ -49,7 +49,6 @@ class Projects {
     addProjectToOption() {
         chooseProject.innerHTML = ""
 
-        chooseProject.innerHTML = ""
         projectsList.forEach((project) => {
 
             const projectNameReg = project.title.replace(/\s+/g, '').toLocaleLowerCase();

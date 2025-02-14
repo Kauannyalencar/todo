@@ -37,15 +37,19 @@ export class TaskRenderer {
 
         const taskContainer = document.querySelector(".tasks-container")
         taskContainer.innerHTML = '';
-        taskContainer.innerHTML += filteredTasks.map(task =>
-            `<div class="task">
+      
+        taskContainer.innerHTML += filteredTasks.map(task => {
+            console.log(task.description.length);
+            
+            const showMoreButton = task.description.length > 50 ? '<span class="show-more">Show more</span>' : ''; // Conditional button
+            return `<div class="task">
     <header class="task-header">
         <h1 class="task-title">${task.title}</h1>
         <span class="date">${this.actualData}</span>
         <div class="description-container">
-            <p class="description">${task.description}</p>
-            <p class="full-description hidden">${task.description}</p>
-            <p class="show-more">Show more</p>
+             <p class="description">${task.description.substring(0, 50)}${showMoreButton}</p> 
+             <p class="full-description hidden">${task.description}${showMoreButton}</p>
+
         </div>
     </header>
     <div class="due-date">
@@ -60,7 +64,7 @@ export class TaskRenderer {
     <span class="priority-task ${task.projectPriority}" data-project="${task.project}">${task.projectPriority}</span>
     </div> 
         `
-        ).join("")
+        }).join("")
 
         const deleteBtns = document.querySelectorAll(".delete-task")
         deleteBtns.forEach(btn => {
@@ -68,32 +72,45 @@ export class TaskRenderer {
                 todo.delete(Number(btn.id))
             })
         })
+
+        
+        const showMoreButtons = document.querySelectorAll('.show-more');
+        showMoreButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const descriptionContainer = button.closest('.description-container');
+                const shortDescription = descriptionContainer.querySelector('.description');
+                const fullDescription = descriptionContainer.querySelector('.full-description');
+
+                shortDescription.classList.toggle('hidden');
+                fullDescription.classList.toggle('hidden');
+            })
+        })
     }
 
     todayFilter() {
-        const filteredTasks = tasks.filter((task) => {
-            const taskDate = parseISO(task.date)
-            return isToday(taskDate)
-        })
+            const filteredTasks = tasks.filter((task) => {
+                const taskDate = parseISO(task.date)
+                return isToday(taskDate)
+            })
         return filteredTasks;
-    }
+        }
 
     upComingFilter(filter) {
-        const filteredTasks = tasks.filter((task) => {
-            const taskDate = parseISO(task.date)
-            return isAfter(taskDate, filter)
-        })
+            const filteredTasks = tasks.filter((task) => {
+                const taskDate = parseISO(task.date)
+                return isAfter(taskDate, filter)
+            })
         return filteredTasks;
-    }
+        }
 
     projectTasks(filter) {
-        const filteredTasks = tasks.filter((task) => {
-            const projectTask = task.project === filter
-            return projectTask;
-        })
+            const filteredTasks = tasks.filter((task) => {
+                const projectTask = task.project === filter
+                return projectTask;
+            })
 
         return filteredTasks;
-    }
+        }
 
 }
 

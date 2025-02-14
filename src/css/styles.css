@@ -316,17 +316,31 @@ select:focus {
 }
 
 .task-header .description {
-    max-width: 100px;
-    /* width: 500px; */
+    max-width: 150px;
+    height: 35px;
+    position: relative;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;    
 }
 
 .full-description {
     margin-top: 5px;
     display: block;
+    position: relative;
+    padding-bottom: 10px;
+}
 
+
+.show-more {
+    z-index: 999;
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+    color: #363638;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .date {
@@ -382,11 +396,6 @@ select:focus {
     opacity: 0.6;
 }
 
-.show-more {
-    color: #363638;
-    font-weight: 600;
-    cursor: pointer;
-}
 
 .hidden {
     display: none;

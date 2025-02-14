@@ -117,16 +117,16 @@ document.addEventListener("click", (event) => {
         })
     })
 
-    const showDecrption = document.querySelectorAll(".show-more")
-    const header = document.querySelector(".task-header")
-    showDecrption.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const fullDescription = btn.previousElementSibling;
-            header.style.height = "auto"
-            toggleElements(btn.parentElement.firstElementChild)
-            toggleElements(fullDescription)
-        })
-    })
+    // const showDecrption = document.querySelectorAll(".show-more")
+    // const header = document.querySelector(".task-header")
+    // showDecrption.forEach(btn => {
+    //     btn.addEventListener("click", (e) => {
+    //         const fullDescription = btn.previousElementSibling;
+    //         header.style.height = "auto"
+    //         toggleElements(btn.parentElement.firstElementChild)
+    //         toggleElements(fullDescription)
+    //     })
+    // })
 })
 
 form.addEventListener("submit", (e) => {
@@ -148,7 +148,9 @@ btnAddProject.addEventListener("click", (e) => {
     projectsList.push(project);
     project.createUi()
     project.addProjectToOption();
+    
     projectName.value = ''
+
 })
 
 cancelProject.addEventListener("click", () => toggleElements(newProjectForm));
